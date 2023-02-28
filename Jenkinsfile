@@ -18,7 +18,7 @@ pipeline
         string(name: 'ec2_instance_name', defaultValue: 'xxx', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
-    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>])
+    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
    {
     sh("export access_key=${AWS_ACCESS_KEY_ID} ")
     sh("export secret_key=${AWS_SECRET_ACCESS_KEY}")
