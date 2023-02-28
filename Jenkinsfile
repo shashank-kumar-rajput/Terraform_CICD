@@ -18,6 +18,11 @@ pipeline
         string(name: 'ec2_instance_name', defaultValue: 'xxx', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
+    withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>])
+   {
+    sh("export access_key=${AWS_ACCESS_KEY_ID} ")
+    sh("export secret_key=${AWS_SECRET_ACCESS_KEY}")
+}
     
         stages{
             stage("Checkout repository"){
@@ -27,20 +32,20 @@ pipeline
                 }
              stage('OS PROVISION') {
             steps {
-                dir("/root/terraform"){
+                
                     sh """
                     export ami_linux=${ami_linux}
                     export ec2_instance_type1=${ec2_instance_type1}
                     export key_name=${key_name}
                     export ec2_instance_name=${ec2_instance_name}
-                    export access_key=${access_key}
-                    export secret_key=${secret_key}
+                   
                     export public_key=${public_key}
                     """
-                }
+              
             }
         }
             
+
 
             
             stage("terraform Initialized"){
