@@ -2,7 +2,11 @@ pipeline
 {
     agent any
         environment {
-            
+             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
+   {
+    sh("export access_key=${AWS_ACCESS_KEY_ID} ")
+    sh("export secret_key=${AWS_SECRET_ACCESS_KEY}")
+}
        ami_linux="${ami_linux}"
        ec2_instance_type1="${ec2_instance_type}"
        key_name="${key_name}"
@@ -18,11 +22,7 @@ pipeline
         string(name: 'ec2_instance_name', defaultValue: 'xxx', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
-    withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
-   {
-    sh("export access_key=${AWS_ACCESS_KEY_ID} ")
-    sh("export secret_key=${AWS_SECRET_ACCESS_KEY}")
-}
+   
     
         stages{
             stage("Checkout repository"){
