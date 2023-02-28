@@ -4,8 +4,11 @@ pipeline
         environment {
              withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
    {
-    sh("export access_key=${AWS_ACCESS_KEY_ID} ")
-    sh("export secret_key=${AWS_SECRET_ACCESS_KEY}")
+     sh """
+                    export access_key=${AWS_ACCESS_KEY_ID}
+                    export secret_key=${AWS_SECRET_ACCESS_KEY}
+                    
+                    """
 }
        ami_linux="${ami_linux}"
        ec2_instance_type1="${ec2_instance_type}"
