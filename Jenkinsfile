@@ -48,7 +48,7 @@ pipeline
               
             }
         }
-        stage("Terraform setup"){
+        stage("terraform setup"){
                 steps{
                     sh("terraform init -reconfigure" )
                 }
