@@ -28,7 +28,7 @@ pipeline
                 }
                 }
                 stage('AWS setup'){
-            steps {
+           
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
               {
                  sh """
@@ -36,6 +36,7 @@ pipeline
                     export TF_VAR_secret_key=${AWS_SECRET_ACCESS_KEY}
                     """  
                      }
+            
                 }
              stage('OS Provision') {
                     sh """
@@ -47,7 +48,7 @@ pipeline
                     """
               
             }
-        }
+        
         stage("terraform setup"){
                 steps{
                     sh("terraform init -reconfigure" )
