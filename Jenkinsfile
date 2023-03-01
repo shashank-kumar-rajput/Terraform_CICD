@@ -2,14 +2,7 @@ pipeline
 {
     agent any
         environment {
-             withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
-   {
-     sh """
-                    export access_key=${AWS_ACCESS_KEY_ID}
-                    export secret_key=${AWS_SECRET_ACCESS_KEY}
-                    
-                    """
-}
+             
        ami_linux="${ami_linux}"
        ec2_instance_type1="${ec2_instance_type}"
        key_name="${key_name}"
@@ -17,6 +10,7 @@ pipeline
        access_key="${access_key}"
        secret_key="${secret_key}"
        public_key="${public_key}"
+
     }
  parameters {
         string(name: 'ami_linux', defaultValue: 'xxx', description: 'AMI setup',)
@@ -35,7 +29,14 @@ pipeline
                 }
              stage('OS PROVISION') {
             steps {
-                
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
+   {
+     sh """
+                    export access_key=${AWS_ACCESS_KEY_ID}
+                    export secret_key=${AWS_SECRET_ACCESS_KEY}
+                    
+                    """
+}
                     sh """
                     export ami_linux=${ami_linux}
                     export ec2_instance_type1=${ec2_instance_type1}
