@@ -22,37 +22,33 @@ pipeline
    
     
         stages{
-            stage("Checkout repository"){
+            stage("Repo Setup"){
                 steps{
                     checkout scm
                 }
                 }
-             stage('OS PROVISION') {
+                stage('AWS setup'){
             steps {
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
-   {
-     sh """
+              {
+                 sh """
                     export TF_VAR_access_key=${AWS_ACCESS_KEY_ID}
                     export TF_VAR_secret_key=${AWS_SECRET_ACCESS_KEY}
-                    
-                    """
-}
+                    """  
+                     }
+                }
+             stage('OS Provision') {
                     sh """
                     export TF_VAR_ami_linux=${ami_linux}
                     export TF_VAR_ec2_instance_type1=${ec2_instance_type1}
                     export TF_VAR_key_name=${key_name}
                     export TF_VAR_ec2_instance_name=${ec2_instance_name}
-                   
                     export TF_VAR_public_key=${public_key}
                     """
               
             }
         }
-            
-
-
-            
-            stage("terraform Initialized"){
+        stage("Terraform setup"){
                 steps{
                     sh("terraform init -reconfigure" )
                 }
