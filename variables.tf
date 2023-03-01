@@ -22,5 +22,5 @@ type=string
 }
 variable ports {
     type= list(number)
-   
+   default = [20,22,80,3306,443,27017]
 }
