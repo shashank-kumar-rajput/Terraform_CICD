@@ -1,5 +1,5 @@
 
-Creating Instance
+#Creating Instance
 resource "aws_instance" "ec2_terraform1"{
  ami = "${var.ami_linux}"
  instance_type= "${var.ec2_instance_type1}"
