@@ -13,10 +13,10 @@ pipeline
 
     }
  parameters {
-        string(name: 'ami_linux', defaultValue: 'xxx', description: 'AMI setup',)
-        string(name: 'ec2_instance_type1', defaultValue: 'xxx', description: 'ec2 instance type',)
-        string(name: 'key_name', defaultValue: 'xxx', description: 'ssh key name',)
-        string(name: 'ec2_instance_name', defaultValue: 'xxx', description: 'EC2 instance name',)
+        string(name: 'ami_linux', defaultValue: 'AMI ', description: 'AMI setup',)
+        string(name: 'ec2_instance_type1', defaultValue: 'EC2 Type', description: 'ec2 instance type',)
+        string(name: 'key_name', defaultValue: 'SSH Key name', description: 'ssh key name',)
+        string(name: 'ec2_instance_name', defaultValue: 'Ec2 Instance Name', description: 'EC2 instance name',)
         choice(name: 'action', description: '', choices: ['apply' , 'destroy'])
     }
    
