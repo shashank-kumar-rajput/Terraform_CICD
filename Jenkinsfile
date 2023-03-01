@@ -4,7 +4,7 @@ pipeline
         environment {
              
        ami_linux="${ami_linux}"
-       ec2_instance_type1="${ec2_instance_type}"
+       ec2_instance_type1="${ec2_instance_type1}"
        key_name="${key_name}"
        ec2_instance_name="${ec2_instance_name}"
        access_key="${access_key}"
