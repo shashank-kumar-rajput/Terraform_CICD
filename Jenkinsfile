@@ -3,13 +3,13 @@ pipeline
     agent any
         environment {
              
-       ami_linux="${ami_linux}"
-       ec2_instance_type1="${ec2_instance_type1}"
-       key_name="${key_name}"
-       ec2_instance_name="${ec2_instance_name}"
-       access_key="${access_key}"
-       secret_key="${secret_key}"
-       public_key="${public_key}"
+       TF_VAR_ami_linux="${ami_linux}"
+       TF_VAR_ec2_instance_type1="${ec2_instance_type1}"
+       TF_VAR_key_name="${key_name}"
+       TF_VAR_ec2_instance_name="${ec2_instance_name}"
+       TF_VAR_access_key="${access_key}"
+       TF_VAR_secret_key="${secret_key}"
+       TF_VAR_public_key="${public_key}"
 
     }
  parameters {
