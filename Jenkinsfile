@@ -28,7 +28,7 @@ pipeline
                 }
                 }
                 stage('AWS setup'){
-           
+             steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
               {
                  sh """
@@ -38,7 +38,9 @@ pipeline
                      }
             
                 }
+                }
              stage('OS Provision') {
+                  steps{
                     sh """
                     export TF_VAR_ami_linux=${ami_linux}
                     export TF_VAR_ec2_instance_type1=${ec2_instance_type1}
@@ -46,7 +48,7 @@ pipeline
                     export TF_VAR_ec2_instance_name=${ec2_instance_name}
                     export TF_VAR_public_key=${public_key}
                     """
-              
+                  }
             }
         
         stage("terraform setup"){
