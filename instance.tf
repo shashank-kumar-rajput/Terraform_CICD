@@ -11,3 +11,4 @@ resource "aws_instance" "ec2_terraform1"{
  }
 
 }
+
