@@ -32,18 +32,18 @@ pipeline
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
    {
      sh """
-                    export access_key=${AWS_ACCESS_KEY_ID}
-                    export secret_key=${AWS_SECRET_ACCESS_KEY}
+                    export TF_VAR_access_key=${AWS_ACCESS_KEY_ID}
+                    export TF_VAR_secret_key=${AWS_SECRET_ACCESS_KEY}
                     
                     """
 }
                     sh """
-                    export ami_linux=${ami_linux}
-                    export ec2_instance_type1=${ec2_instance_type1}
-                    export key_name=${key_name}
-                    export ec2_instance_name=${ec2_instance_name}
+                    export TF_VAR_ami_linux=${ami_linux}
+                    export TF_VAR_ec2_instance_type1=${ec2_instance_type1}
+                    export TF_VAR_key_name=${key_name}
+                    export TF_VAR_ec2_instance_name=${ec2_instance_name}
                    
-                    export public_key=${public_key}
+                    export TF_VAR_public_key=${public_key}
                     """
               
             }
