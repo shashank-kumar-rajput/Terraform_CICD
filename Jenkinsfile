@@ -34,7 +34,7 @@ pipeline
                  sh """
                     export AWS_ACCESS_KEY_ID=${access_key}
                     export AWS_SECRET_ACCESS_KEY=${secret_key}
-                    export AWS_PROFILE="my-tf"
+                    export AWS_PROFILE="default"
                     export TF_VAR_access_key=${access_key}
                     export TF_VAR_secret_key=${secret_key}
                     """  
