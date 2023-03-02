@@ -29,7 +29,7 @@ pipeline
                 }
                 stage('AWS setup'){
              steps{
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123']])
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_1234']])
               {
                  sh """
                     export TF_VAR_access_key=${AWS_ACCESS_KEY_ID}
