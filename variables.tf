@@ -24,3 +24,21 @@ variable ports {
     type= list(number)
    default = [20,22,80,3306,443,27017]
 }
+variable "acl" {
+    type        = string
+    description = " Defaults to private "
+    default     = "private"
+}
+variable "bucket_prefix" {
+    type        = string
+    description = "(required since we are not using 'bucket') Creates a unique bucket name beginning with the specified prefix"
+    default     = "my-s3bucket-"
+}
+variable "tags" {
+    type        = map
+    description = "(Optional) A mapping of tags to assign to the bucket."
+    default     = {
+        environment = "DEV"
+        terraform   = "true"
+    }
+}
