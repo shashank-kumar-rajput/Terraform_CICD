@@ -46,7 +46,7 @@ pipeline
                     export TF_VAR_ec2_instance_type1=${ec2_instance_type1}
                     export TF_VAR_key_name=${key_name}
                     export TF_VAR_ec2_instance_name=${ec2_instance_name}
-                    export TF_VAR_public_key=${public_key}
+                    export TF_VAR_public_key='${public_key}'
                     """
                   }
             }
