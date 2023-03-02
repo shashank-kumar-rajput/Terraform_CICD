@@ -53,18 +53,18 @@ pipeline
         
         stage("terraform setup"){
                 steps{
-                    sh("terraform init -reconfigure" )
+                    sh("terraform init -reconfigure -no-color" )
                 }
             }
             stage("terraform plan"){
                 steps{
-                    sh("terraform plan")
+                    sh("terraform plan -no-color")
                 }
             }
             stage("terraform action"){
                 steps{
                       echo "Terraform action is --> ${action}"
-                      sh("terraform ${action} --auto-approve")
+                      sh("terraform ${action} --auto-approve -no-color")
                 }
             }
         }
