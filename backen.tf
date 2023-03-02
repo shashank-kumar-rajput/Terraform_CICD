@@ -3,7 +3,7 @@ terraform {
     bucket = "tf-aws-state-bucket"
     key = "main"
     region = "us-east-1"
-    profile = "myprofile"
+    profile = "default"
 
     dynamodb_table = "tf-dynamo-db-table"
   }
