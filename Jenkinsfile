@@ -2,7 +2,8 @@ pipeline
 {
     agent any
         environment {
-             
+       AWS_ACCESS_KEY_ID=""
+       AWS_SECRET_ACCESS_KEY=""
        TF_VAR_ami_linux="${ami_linux}"
        TF_VAR_ec2_instance_type1="${ec2_instance_type1}"
        TF_VAR_key_name="${key_name}"
