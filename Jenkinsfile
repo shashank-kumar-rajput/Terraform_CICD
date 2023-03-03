@@ -23,13 +23,21 @@ pipeline
    
     
         stages{
-            stage("Repo Setup"){
-                steps{
+        stage("Jenkins Setup"){
+            steps {
+                script {
+                    currentBuild.displayName = "${ec2_instance_name}+"-"+${action}"
+                    currentBuild.description = "Job for provising :"+{ec2_instance_name}
+                }
+            }
+        }
+        stage("Repo Setup"){
+            steps{
                     checkout scm
                 }
                 }
-             stage('OS Provision') {
-                  steps{
+        stage('ENV Provision') {
+            steps{
                     sh """
                     export TF_VAR_ami_linux=${ami_linux}
                     export TF_VAR_ec2_instance_type1=${ec2_instance_type1}
@@ -40,9 +48,9 @@ pipeline
                     """
                   }
             }
-        
-        stage("terraform_setup"){
-                         steps{
+        stage('AWS Provision'){
+            steps{
+                 steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
               {
                script {
@@ -50,20 +58,20 @@ pipeline
                     env.access_key_s3 = access_key_s3
                     env.secret_key_s3 = AWS_SECRET_ACCESS_KEY
                                 }
+              }
 
-
+            }
+        }
+        stage("terraform setup"){
+            steps{
                  sh """
-                    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                    echo $AWS_ACCESS_KEY_ID
-                    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
                     export AWS_PROFILE="default"
+                    export AWS_ACCESS_KEY_ID=${env.access_key_s3}
+                    export AWS_SECRET_ACCESS_KEY=${env.secret_key_s3}
                     export TF_VAR_access_key=${access_key}
                     export TF_VAR_secret_key=${secret_key}
                     terraform init -reconfigure -no-color
                     """  
-                    
-                     }
-                 
                 }
             }
             stage("terraform plan"){
@@ -89,4 +97,10 @@ pipeline
                 }
             }
         }
+    post {
+        failure {
+          sh("echo 'Build Failed'")
+        }
+    }
+
     }
