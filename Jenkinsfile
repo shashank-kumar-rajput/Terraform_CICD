@@ -97,9 +97,18 @@ pipeline
             }
         }
     post {
+        success {
+             mail to: 'shashank4717@gmail.com',
+             subject: "Pipeline Successful: ${currentBuild.fullDisplayName} ",
+             body: "Following provisions on the current infrastructure:  ${env.BUILD_URL}"
+    }
         failure {
-          sh("echo 'Build Failed'")
-        }
+             mail to: 'shashank4717@gmail.com',
+             subject: "Failed Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is wrong with ${env.BUILD_URL}"
+    }
+
+
     }
 
     }
