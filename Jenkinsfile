@@ -83,9 +83,9 @@ pipeline
                     sh """
                         export AWS_ACCESS_KEY_ID=${env.access_key_s3}
                         export AWS_SECRET_ACCESS_KEY=${env.secret_key_s3}
+                        echo "Terraform action is --> ${action}"
+                        terraform ${action} --auto-approve -no-color
                     """
-                      echo "Terraform action is --> ${action}"
-                      sh("terraform ${action} --auto-approve -no-color")
                 }
             }
         }
