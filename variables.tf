@@ -24,6 +24,11 @@ variable ports {
     type= list(number)
    default = [20,22,80,3306,443,27017]
 }
+variable "versioning" {
+    type        = bool
+    description = "(Optional) A state of versioning."
+    default     = true
+}
 variable "acl" {
     type        = string
     description = " Defaults to private "
