@@ -28,20 +28,7 @@ pipeline
                 }
                 }
                 stage('AWS setup'){
-             steps{
-                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
-              {
-                 sh """
-                    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
-                    echo $AWS_ACCESS_KEY_ID
-                    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
-                    export AWS_PROFILE="default"
-                    export TF_VAR_access_key=${access_key}
-                    export TF_VAR_secret_key=${secret_key}
-                    """  
-                     }
-            
-                }
+                   sh("echo 'HI' ")
                 }
              stage('OS Provision') {
                   steps{
@@ -57,9 +44,20 @@ pipeline
             }
         
         stage("terraform setup"){
-                steps{
-                       sh("echo $AWS_ACCESS_KEY_ID")
-                    sh("terraform init -reconfigure -no-color" )
+                         steps{
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
+              {
+                 sh """
+                    export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
+                    echo $AWS_ACCESS_KEY_ID
+                    export AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY
+                    export AWS_PROFILE="default"
+                    export TF_VAR_access_key=${access_key}
+                    export TF_VAR_secret_key=${secret_key}
+                    terraform init -reconfigure -no-color
+                    """  
+                    
+                     }
                  
                 }
             }
