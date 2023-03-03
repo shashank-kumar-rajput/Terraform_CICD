@@ -45,6 +45,13 @@ pipeline
                          steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
               {
+                                script {
+                    def access_key_s3 = AWS_ACCESS_KEY_ID
+                    return access_key_s3
+                    env.secret_key_s3 = AWS_SECRET_ACCESS_KEY
+                                }
+
+
                  sh """
                     export AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID
                     echo $AWS_ACCESS_KEY_ID
@@ -61,6 +68,11 @@ pipeline
             }
             stage("terraform plan"){
                 steps{
+                    echo "${access_key_s3}"  
+                                             
+                     sh """
+                        export AWS_ACCESS_KEY_ID=$access_key_s3
+                        export AWS_SECRET_ACCESS_KEY=${env.secret_key_s3}
 
                     sh("terraform plan -no-color")
                 }
