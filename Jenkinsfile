@@ -26,8 +26,8 @@ pipeline
         stage("Jenkins Setup"){
             steps {
                 script {
-                    currentBuild.displayName = "${ec2_instance_name}+"-"+${action}"
-                    currentBuild.description = "Job for provising :"+{ec2_instance_name}
+                    currentBuild.displayName = "${ec2_instance_name}-${action}"
+                    currentBuild.description = "Job for provising : ${ec2_instance_name}"
                 }
             }
         }
