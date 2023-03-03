@@ -27,9 +27,6 @@ pipeline
                     checkout scm
                 }
                 }
-                stage('AWS setup'){
-                   sh("echo 'HI' ")
-                }
              stage('OS Provision') {
                   steps{
                     sh """
