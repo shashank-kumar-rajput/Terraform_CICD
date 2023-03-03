@@ -59,10 +59,12 @@ pipeline
         stage("terraform setup"){
                 steps{
                     sh("terraform init -reconfigure -no-color" )
+                    sh("echo $AWS_ACCESS_KEY_ID")
                 }
             }
             stage("terraform plan"){
                 steps{
+
                     sh("terraform plan -no-color")
                 }
             }
