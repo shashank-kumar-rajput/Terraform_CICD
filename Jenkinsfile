@@ -47,7 +47,7 @@ pipeline
               {
                                 script {
                     def access_key_s3 = AWS_ACCESS_KEY_ID
-                    return access_key_s3
+                    env.access_key_s3 = access_key_s3
                     env.secret_key_s3 = AWS_SECRET_ACCESS_KEY
                                 }
 
@@ -68,10 +68,11 @@ pipeline
             }
             stage("terraform plan"){
                 steps{
-                    echo "${terraform_setup}"  
+                   
                                              
                      sh """
-                        export AWS_ACCESS_KEY_ID=$access_key_s3
+                      echo "${env.access_key_s3}"
+                        export AWS_ACCESS_KEY_ID=${env.access_key_s3}
                         export AWS_SECRET_ACCESS_KEY=${env.secret_key_s3}
                         terraform plan -no-color
                         """
