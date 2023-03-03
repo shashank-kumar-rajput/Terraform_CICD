@@ -22,7 +22,7 @@ pipeline
     }
    
     
-        stages{
+    stages{
         stage("Jenkins Setup"){
             steps {
                 script {
@@ -35,7 +35,7 @@ pipeline
             steps{
                     checkout scm
                 }
-                }
+            }
         stage('ENV Provision') {
             steps{
                     sh """
@@ -49,7 +49,6 @@ pipeline
                   }
             }
         stage('AWS Provision'){
-            steps{
                  steps{
                 withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'cred_123',ACCESS_KEY: 'ACCESS_KEY', SECRET_KEY: 'SECRET_KEY']])
               {
